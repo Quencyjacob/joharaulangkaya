@@ -1,0 +1,383 @@
+<html><head><base href="." />
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: 'Georgia', serif;
+    background: #f4e4bc;
+    background-image: 
+      radial-gradient(#d4c4a1 1px, transparent 1px),
+      radial-gradient(#d4c4a1 1px, transparent 1px);
+    background-size: 20px 20px;
+    background-position: 0 0, 10px 10px;
+    position: relative;
+  }
+
+  body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.1'/%3E%3C/svg%3E");
+    pointer-events: none;
+    opacity: 0.3;
+  }
+
+  .login-container {
+    background: #fff9eb;
+    padding: 40px;
+    border-radius: 2px;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    border: 1px solid #d4c4a1;
+    position: relative;
+    animation: fadeIn 1s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .login-container::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    border: 1px solid #d4c4a1;
+    pointer-events: none;
+  }
+
+  .login-container::after {
+    content: '';
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-top: 2px solid #8b7355;
+    border-left: 2px solid #8b7355;
+    top: 5px;
+    left: 5px;
+  }
+
+  .login-container .corner-br {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-bottom: 2px solid #8b7355;
+    border-right: 2px solid #8b7355;
+    bottom: 5px;
+    right: 5px;
+  }
+
+  .login-header {
+    text-align: center;
+    margin-bottom: 30px;
+    position: relative;
+  }
+
+  .login-header::after {
+    content: '';
+    display: block;
+    width: 60%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #8b7355, transparent);
+    margin: 20px auto 0;
+  }
+
+  .login-header svg {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 15px;
+    stroke: #8b7355;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+  }
+
+  h1 {
+    color: #5c4933;
+    margin: 0;
+    font-size: 28px;
+    font-family: 'Georgia', serif;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.5);
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+    position: relative;
+    transition: all 0.3s ease;
+  }
+
+  .form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #5c4933;
+    font-size: 14px;
+    font-weight: bold;
+    transition: color 0.3s ease;
+  }
+
+  .form-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #d4c4a1;
+    background: #fff9eb;
+    border-radius: 2px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    outline: none;
+    box-sizing: border-box;
+    font-family: 'Georgia', serif;
+  }
+
+  .form-group input:focus {
+    border-color: #8b7355;
+    box-shadow: 0 0 0 2px rgba(139, 115, 85, 0.1);
+  }
+
+  .login-button {
+    width: 100%;
+    padding: 14px;
+    background: #8b7355;
+    border: 1px solid #5c4933;
+    border-radius: 2px;
+    color: #fff9eb;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Georgia', serif;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .login-button::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+  }
+
+  .login-button:hover::after {
+    width: 300px;
+    height: 300px;
+  }
+
+  .login-button:hover {
+    background: #5c4933;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .forgot-password {
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(139, 115, 85, 0.2);
+  }
+
+  .forgot-password a {
+    color: #8b7355;
+    text-decoration: none;
+    font-size: 14px;
+    font-family: 'Georgia', serif;
+    transition: all 0.3s ease;
+  }
+
+  .forgot-password a:hover {
+    color: #5c4933;
+    text-decoration: underline;
+  }
+
+  .flower {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+  }
+
+  .flower-top-left {
+    top: -20px;
+    left: -20px;
+    transform: rotate(-45deg);
+  }
+
+  .flower-bottom-right {
+    bottom: -20px;
+    right: -20px;
+    transform: rotate(135deg);
+  }
+
+  .flower path {
+    fill: #8b7355;
+    opacity: 0.7;
+    animation: flowerSway 3s ease-in-out infinite alternate;
+  }
+
+  @keyframes flowerSway {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(10deg); }
+  }
+
+  /* Adding new styles for stickers */
+  .sticker {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    pointer-events: none;
+    transition: transform 0.3s ease;
+  }
+
+  .sticker-heart {
+    top: -25px;
+    right: 20px;
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .sticker-star {
+    bottom: -15px;
+    left: 30px;
+    animation: spin 4s linear infinite;
+  }
+
+  .sticker-cloud {
+    top: 50%;
+    right: -30px;
+    animation: bounce 2s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-5px) scale(1.1); }
+  }
+</style>
+</head>
+<body>
+  <div class="login-container">
+    <!-- Adding cute stickers using SVG -->
+    <svg class="sticker sticker-heart" viewBox="0 0 24 24">
+      <path fill="#ff7eb3" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+    </svg>
+    
+    <svg class="sticker sticker-star" viewBox="0 0 24 24">
+      <path fill="#ffd700" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+    </svg>
+    
+    <svg class="sticker sticker-cloud" viewBox="0 0 24 24">
+      <path fill="#a5d8ff" d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z"/>
+    </svg>
+
+    <svg class="flower flower-top-left" viewBox="0 0 100 100">
+      <path d="M50 0 C60 20 80 20 90 10 C80 30 80 50 90 60 C70 50 50 70 50 90 C50 70 30 50 10 60 C20 50 20 30 10 10 C20 20 40 20 50 0Z"/>
+    </svg>
+    <svg class="flower flower-bottom-right" viewBox="0 0 100 100">
+      <path d="M50 0 C60 20 80 20 90 10 C80 30 80 50 90 60 C70 50 50 70 50 90 C50 70 30 50 10 60 C20 50 20 30 10 10 C20 20 40 20 50 0Z"/>
+    </svg>
+    
+    <div class="corner-br"></div>
+    <div class="login-header">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#8b7355" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+        <circle cx="12" cy="7" r="4"></circle>
+      </svg>
+      <h1>Welcome Back</h1>
+    </div>
+    <form id="loginForm">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" required autocomplete="email">
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" required autocomplete="current-password">
+      </div>
+      <button type="submit" class="login-button">Log In</button>
+    </form>
+    <div class="forgot-password">
+      <a href="https://example.com/reset-password">Forgot your password?</a>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+
+      console.log('Login attempt:', { email });
+
+      if (email && password) {
+        setTimeout(() => {
+          alert('Login successful! (This is just a demo)');
+        }, 1000);
+      } else {
+        alert('Please fill in all fields');
+      }
+    });
+
+    const inputs = document.querySelectorAll('input');
+    inputs.forEach(input => {
+      input.addEventListener('focus', function() {
+        this.parentElement.style.transform = 'scale(1.02)';
+      });
+      
+      input.addEventListener('blur', function() {
+        this.parentElement.style.transform = 'scale(1)';
+      });
+    });
+
+    const flowers = document.querySelectorAll('.flower');
+    flowers.forEach(flower => {
+      flower.addEventListener('mouseover', function() {
+        this.style.transform = 'scale(1.1) rotate(0deg)';
+      });
+      
+      flower.addEventListener('mouseout', function() {
+        this.style.transform = this.classList.contains('flower-top-left') ? 
+          'rotate(-45deg)' : 'rotate(135deg)';
+      });
+    });
+
+    // Adding sticker animations
+    const stickers = document.querySelectorAll('.sticker');
+    stickers.forEach(sticker => {
+      sticker.addEventListener('mouseover', function() {
+        this.style.transform = 'scale(1.2)';
+      });
+      
+      sticker.addEventListener('mouseout', function() {
+        this.style.transform = 'scale(1)';
+      });
+    });
+  </script>
+</body></html>
